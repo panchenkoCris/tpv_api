@@ -112,4 +112,13 @@ class LineaticketController extends Controller
         $lineaticket->delete();
         return response()->json('Linea ticket eliminada');
     }
+
+    public function showAllProductsByTicket(Request $request)
+    {
+        $this->validate($request, [
+            'id_ticket' => 'required'
+        ]);
+
+        $ticket = $request->input('id_ticket');
+    }
 }

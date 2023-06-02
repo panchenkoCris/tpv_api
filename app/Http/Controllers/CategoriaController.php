@@ -12,7 +12,7 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAll()
     {
         $categorias = Categoria::all();
         return response()->json($categorias);
@@ -24,7 +24,7 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request,[
             'genero' => 'required'
@@ -44,7 +44,7 @@ class CategoriaController extends Controller
      * @param  int  $id_categoria
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showOne($id)
     {
         $categorias = Categoria::find($id);
         return response()->json($categorias);

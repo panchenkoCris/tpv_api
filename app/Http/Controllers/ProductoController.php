@@ -13,7 +13,7 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAll()
     {
         $productos = Producto::all();
         return response()->json($productos);
@@ -25,7 +25,7 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request, [
             'cb_producto' => 'required',
@@ -68,7 +68,7 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showOne($id)
     {
         $producto = Producto::find($id);
         return response()->json($producto);

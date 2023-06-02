@@ -13,7 +13,7 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAll()
     {
         $tickets = Ticket::all();
         return response()->json($tickets);
@@ -25,7 +25,7 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request,[
             'fecha' => 'required',
@@ -53,7 +53,7 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showOne($id)
     {
         $ticket = Ticket::find($id);
         return response()->json($ticket);

@@ -12,7 +12,7 @@ class DescuentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAll()
     {
         $descuentos = Descuento::all();
         return response()->json($descuentos);
@@ -24,7 +24,7 @@ class DescuentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request, [
             'descripcion' => 'required',
@@ -47,7 +47,7 @@ class DescuentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showOne($id)
     {
         $descuento = Descuento::find($id);
         return response()->json($descuento);

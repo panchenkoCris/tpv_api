@@ -13,41 +13,36 @@
 |
 */
 
-$router->get('/categoria', 'CategoriaController@index');
-$router->get('/categoria/{id}', 'CategoriaController@show');
-$router->post('/categoria/create', 'CategoriaController@store');
+$router->get('/categoria', 'CategoriaController@showAll');
+$router->get('/categoria/{id}', 'CategoriaController@showOne');
+$router->post('/categoria/create', 'CategoriaController@create');
 $router->post('/categoria/update/{id}', 'CategoriaController@update');
 $router->delete('/categoria/delete/{id}', 'CategoriaController@destroy');
 
-$router->get('/tipo', 'TipoController@index');
-$router->get('/tipo/{id}', 'TipoController@show');
-$router->post('/tipo/create', 'TipoController@store');
+$router->get('/tipo', 'TipoController@showAll');
+$router->get('/tipo/{id}', 'TipoController@showOne');
+$router->post('/tipo/create', 'TipoController@create');
 $router->post('/tipo/update/{id}', 'TipoController@update');
 $router->delete('/tipo/delete/{id}', 'TipoController@destroy');
 
-$router->get('/descuento', 'DescuentoController@index');
-$router->get('/descuento/{id}', 'DescuentoController@show');
-$router->post('/descuento/create', 'DescuentoController@store');
+$router->get('/descuento', 'DescuentoController@showAll');
+$router->get('/descuento/{id}', 'DescuentoController@showOne');
+$router->post('/descuento/create', 'DescuentoController@create');
 $router->post('/descuento/update/{id}', 'DescuentoController@update');
 $router->delete('/descuento/delete/{id}', 'DescuentoController@destroy');
 
-$router->get('/subproducto', 'SubproductoController@index');
-$router->get('/subproducto/{id}', 'SubproductoController@show');
-$router->post('/subproducto/create', 'SubproductoController@store');
-$router->post('/subproducto/update/{id}', 'SubproductoController@update');
-$router->delete('/subproducto/delete/{id}', 'SubproductoController@destroy');
-
-$router->get('/producto', 'ProductoController@index');
-$router->get('/producto/{id}', 'ProductoController@show');
-$router->post('/producto/create', 'ProductoController@store');
+$router->get('/producto', 'ProductoController@showAll');
+$router->get('/producto/{id}', 'ProductoController@showOne');
+$router->post('/producto/create', 'ProductoController@create');
 $router->post('/producto/update/{id}', 'ProductoController@update');
 $router->delete('/producto/delete/{id}', 'ProductoController@destroy');
 
-$router->get('/usuarios', 'UsuariosController@index');
-$router->get('/usuarios/{id}', 'UsuariosController@show');
-$router->post('/usuarios/create', 'UsuariosController@store');
+$router->get('/usuarios', 'UsuariosController@showAll');
+$router->get('/usuarios/{id}', 'UsuariosController@showOne');
+$router->post('/usuarios/create', 'UsuariosController@create');
 $router->post('/usuarios/update/{id}', 'UsuariosController@update');
 $router->delete('/usuarios/delete/{id}', 'UsuariosController@destroy');
+$router->get('/usuarios/authenticate', 'UsuariosController@authenticate');
 
 $router->get('/lineaticket', 'LineaticketController@showAll');
 $router->get('/lineaticket/{id}', 'LineaticketController@showOne');
@@ -55,15 +50,15 @@ $router->post('/lineaticket/create', 'LineaticketController@create');
 $router->post('/lineaticket/update/{id}', 'LineaticketController@update');
 $router->delete('/lineaticket/delete/{id}', 'LineaticketController@destroy');
 
-$router->get('/cuenta', 'CuentaController@index');
-$router->get('/cuenta/{id}', 'CuentaController@show');
-$router->post('/cuenta/create', 'CuentaController@store');
+$router->get('/cuenta', 'CuentaController@showAll');
+$router->get('/cuenta/{id}', 'CuentaController@showOne');
+$router->post('/cuenta/create', 'CuentaController@create');
 $router->post('/cuenta/update/{id}', 'CuentaController@update');
 $router->delete('/cuenta/delete/{id}', 'CuentaController@destroy');
 
-$router->get('/ticket', 'TicketController@index');
-$router->get('/ticket/{id}', 'TicketController@show');
-$router->post('/ticket/create', 'TicketController@store');
+$router->get('/ticket', 'TicketController@showAll');
+$router->get('/ticket/{id}', 'TicketController@showOne');
+$router->post('/ticket/create', 'TicketController@create');
 $router->post('/ticket/update/{id}', 'TicketController@update');
 $router->delete('/ticket/delete/{id}', 'TicketController@destroy');
 

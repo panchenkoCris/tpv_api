@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cuenta;
-use App\Models\Usuarios;
-use App\Models\Descuento;
+use App\Models\Ticket;
+use App\Models\Producto;
 
 class CuentaController extends Controller
 {
@@ -14,7 +14,7 @@ class CuentaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAll()
     {
         $cuentas = Cuenta::all();
         return response()->json($cuentas);
@@ -26,7 +26,7 @@ class CuentaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request, [
             'id_usuario' => 'required',
@@ -48,7 +48,7 @@ class CuentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showOne($id)
     {
         $cuenta = Cuenta::find($id);
         return response()->json($cuenta);

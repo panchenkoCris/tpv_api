@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use \Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Usuarios;
+use Auth;
 
 class UsuariosController extends Controller
 {
@@ -12,7 +16,7 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAll()
     {
         $usuarios = Usuarios::all();
         return response()->json($usuarios);
@@ -24,7 +28,7 @@ class UsuariosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request, [
             'nombre' => 'required',
@@ -37,7 +41,8 @@ class UsuariosController extends Controller
 
         $usuario->nombre = $request->input('nombre');
         $usuario->correo = $request->input('correo');
-        $usuario->contraseña = $request->input('contraseña');
+        $contraseñaSalteada = Hash::make($request->input('contraseña'));
+        $usuario->contraseña = $contraseñaSalteada;
         $usuario->rol = $request->input('rol');
 
         $usuario->save();
@@ -50,7 +55,7 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showOne($id)
     {
         $usuario = Usuarios::find($id);
         return response()->json($usuario);
@@ -100,5 +105,37 @@ class UsuariosController extends Controller
         $usuario = Usuarios::find($id);
         $usuario->delete();
         return response()->json('Usuario eliminado');
+    }
+
+
+
+    /**
+     * authenticate that the user's information passed by parameters
+     * exists in the database
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function authenticate(Request $request)
+    {
+        $this->validate($request, [
+            'correo' => 'required',
+            'contraseña' => 'required'
+        ]);
+
+        $correo = $request->input('correo');
+        $contraseña_parametro = $request->input('contraseña');
+
+        $usuario = DB::table('usuarios')->where(['correo'=> $correo])->first();
+
+        if(!empty($usuario)) {
+            if(Hash::check($contraseña_parametro, $usuario->contraseña)) {
+                return response()->json($usuario);
+            } else {
+                return response()->json("Error");
+            }            
+        } else {
+            return response()->json("No existe");
+        }
     }
 }

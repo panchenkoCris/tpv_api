@@ -12,7 +12,7 @@ class TipoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAll()
     {
         $tipos = Tipo::all();
         return response()->json($tipos);
@@ -24,7 +24,7 @@ class TipoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request,[
             'nombre_tipo' => 'required'
@@ -46,7 +46,7 @@ class TipoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showOne($id)
     {
         $tipo = Tipo::find($id);
         return response()->json($tipo);
