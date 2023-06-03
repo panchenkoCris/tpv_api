@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cuenta;
-use App\Models\Ticket;
-use App\Models\Producto;
+use App\Models\Descuento;
+use Illuminate\Support\Facades\DB;
 
 class CuentaController extends Controller
 {
@@ -94,5 +94,25 @@ class CuentaController extends Controller
         $cuenta = Cuenta::find($id);
         $cuenta->delete();
         return response()->json('Cuenta eliminada');
+    }
+
+
+    public function getAllDiscountsUser(Request $request) {
+        $this->validate($request, [
+            'id_usuario' => 'required'
+        ]);
+
+        $id_usuario = $request->input('id_usuario');
+        $descuentos = DB::table('cuenta as c')
+                ->select('d.*')
+                ->leftJoin('descuento as d', 'c.id_descuento', '=', 'd.id')
+                ->leftJoin('usuarios as u', 'c.id_usuario', '=', 'u.id_usuario')
+                ->where('c.id_usuario', $id_usuario)
+                ->get();
+
+
+        if(!empty($descuentos)) {
+            return response()->json($descuentos);  
+        }      
     }
 }

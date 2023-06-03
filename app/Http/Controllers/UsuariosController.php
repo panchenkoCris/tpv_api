@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use \Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Usuarios;
-use Auth;
 
 class UsuariosController extends Controller
 {
@@ -130,12 +128,12 @@ class UsuariosController extends Controller
 
         if(!empty($usuario)) {
             if(Hash::check($contraseña_parametro, $usuario->contraseña)) {
-                return response()->json($usuario);
+                return response()->json(["status"=>1, "message"=>"Autentificación exitosa","data"=> $usuario]);
             } else {
-                return response()->json("Error");
+                return response()->json(["status"=>0, "message"=>"No coindicen los datos", "data"=>null]);
             }            
         } else {
-            return response()->json("No existe");
+            return response()->json(["status"=>0, "message"=>"No existe","data"=>null]);
         }
     }
 }

@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\CuentaController;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -42,19 +43,21 @@ $router->get('/usuarios/{id}', 'UsuariosController@showOne');
 $router->post('/usuarios/create', 'UsuariosController@create');
 $router->post('/usuarios/update/{id}', 'UsuariosController@update');
 $router->delete('/usuarios/delete/{id}', 'UsuariosController@destroy');
-$router->get('/usuarios/authenticate', 'UsuariosController@authenticate');
+$router->get('/authenticate', 'UsuariosController@authenticate');
 
 $router->get('/lineaticket', 'LineaticketController@showAll');
 $router->get('/lineaticket/{id}', 'LineaticketController@showOne');
 $router->post('/lineaticket/create', 'LineaticketController@create');
 $router->post('/lineaticket/update/{id}', 'LineaticketController@update');
 $router->delete('/lineaticket/delete/{id}', 'LineaticketController@destroy');
+$router->get('/productosTicket', 'LineaticketController@showAllProductsByTicket');
 
 $router->get('/cuenta', 'CuentaController@showAll');
 $router->get('/cuenta/{id}', 'CuentaController@showOne');
 $router->post('/cuenta/create', 'CuentaController@create');
 $router->post('/cuenta/update/{id}', 'CuentaController@update');
 $router->delete('/cuenta/delete/{id}', 'CuentaController@destroy');
+$router->get('/descuentosUsuario', 'CuentaController@getAllDiscountsUser');
 
 $router->get('/ticket', 'TicketController@showAll');
 $router->get('/ticket/{id}', 'TicketController@showOne');

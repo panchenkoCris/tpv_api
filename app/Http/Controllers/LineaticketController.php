@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Lineaticket;
 use App\Models\Ticket;
 use App\Models\Producto;
+use Illuminate\Support\Facades\DB;
 
 class LineaticketController extends Controller
 {
@@ -119,6 +120,17 @@ class LineaticketController extends Controller
             'id_ticket' => 'required'
         ]);
 
-        $ticket = $request->input('id_ticket');
+        $id_ticket = $request->input('id_ticket');
+
+        $productos = DB::table('lineaticket as lt')
+                ->select('p.*')
+                ->leftJoin('ticket as t', 'lt.id_ticket', '=', 't.id_ticket')
+                ->leftJoin('producto as p', 'lt.cb_producto', '=', 'p.cb_producto')
+                ->where('t.id_ticket', $id_ticket)
+                ->get();
+
+        if(!empty($productos)) {
+            return response()->json($productos);
+        }
     }
 }
