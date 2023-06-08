@@ -133,4 +133,37 @@ class LineaticketController extends Controller
             return response()->json($productos);
         }
     }
+
+    public function showAllLineTicketsByTicket(Request $request)
+    {
+        $this->validate($request, [
+            'id_ticket' => 'required'
+        ]);
+
+        $id_ticket = $request->input('id_ticket');
+
+        $lineatickets = DB::table('lineaticket as lt')
+                ->select('lt.*')
+                ->leftJoin('ticket as t', 'lt.id_ticket', '=', 't.id_ticket')
+                ->where('t.id_ticket', $id_ticket)
+                ->get();
+
+        if(!empty($lineatickets)) {
+            return response()->json($lineatickets);
+        }
+    }
+
+    public function eliminarLineaTicket(Request $request)
+    {
+        $this->validate($request, [
+            'id_lineaticket' => 'required'
+        ]);
+
+        $id_lineaticket = $request->input('id_lineaticket');
+        
+        $lineaticket = Lineaticket::find($id_lineaticket);
+        $lineaticket->delete();
+        return response()->json('Linea ticket eliminada');
+    }
+
 }

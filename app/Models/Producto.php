@@ -11,7 +11,7 @@ class Producto extends Model
     public $timestamps = false;
     protected $fillable = [
         'cb_producto', 'existencias', 'precio', 'talla',
-        'color', 'descripcion', 'id_tipo', 'id_categoria'
+        'color', 'descripcion', 'imagen','id_tipo', 'id_categoria'
     ];
 
 }

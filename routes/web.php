@@ -37,6 +37,7 @@ $router->get('/producto/{id}', 'ProductoController@showOne');
 $router->post('/producto/create', 'ProductoController@create');
 $router->post('/producto/update/{id}', 'ProductoController@update');
 $router->delete('/producto/delete/{id}', 'ProductoController@destroy');
+$router->post('/eliminarProducto', 'ProductoController@eliminarProducto');
 
 $router->get('/usuarios', 'UsuariosController@showAll');
 $router->get('/usuarios/{id}', 'UsuariosController@showOne');
@@ -51,6 +52,8 @@ $router->post('/lineaticket/create', 'LineaticketController@create');
 $router->post('/lineaticket/update/{id}', 'LineaticketController@update');
 $router->delete('/lineaticket/delete/{id}', 'LineaticketController@destroy');
 $router->get('/productosTicket', 'LineaticketController@showAllProductsByTicket');
+$router->get('/lineaticketsTicket', 'LineaticketController@showAllLineTicketsByTicket');
+$router->post('/eliminarLineaTicket', 'LineaticketController@eliminarLineaTicket');
 
 $router->get('/cuenta', 'CuentaController@showAll');
 $router->get('/cuenta/{id}', 'CuentaController@showOne');
@@ -58,12 +61,15 @@ $router->post('/cuenta/create', 'CuentaController@create');
 $router->post('/cuenta/update/{id}', 'CuentaController@update');
 $router->delete('/cuenta/delete/{id}', 'CuentaController@destroy');
 $router->get('/descuentosUsuario', 'CuentaController@getAllDiscountsUser');
+$router->post('/actualizarDescuentoUsuario', 'CuentaController@actualizarDescuentoUsuario');
+$router->get('/getAllAccountsPerUser', 'CuentaController@getAllAccountsPerUser');
 
 $router->get('/ticket', 'TicketController@showAll');
 $router->get('/ticket/{id}', 'TicketController@showOne');
 $router->post('/ticket/create', 'TicketController@create');
 $router->post('/ticket/update/{id}', 'TicketController@update');
 $router->delete('/ticket/delete/{id}', 'TicketController@destroy');
+$router->get('/obtenerTicketLibre', 'TicketController@obtenerTicketLibre');
 
 $router->get('/', function () use ($router) {
     return $router->app->version();

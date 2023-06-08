@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\Usuarios;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -107,4 +108,11 @@ class TicketController extends Controller
         $ticket->delete();
         return response()->json('Ticket eliminado');
     }
+
+    public function obtenerTicketLibre()
+    {
+        $ticket = Ticket::where('registrado', 0)->first();
+        return response()->json($ticket);
+    }
+
 }

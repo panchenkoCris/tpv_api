@@ -12,6 +12,6 @@ class Cuenta extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id_cliente','id_descuento', 'descuento_activado'
+        'id_usuario','id_descuento', 'descuento_activado'
     ];
 }

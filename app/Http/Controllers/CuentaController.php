@@ -96,6 +96,18 @@ class CuentaController extends Controller
         return response()->json('Cuenta eliminada');
     }
 
+    public function getAllAccountsPerUser(Request $request)
+    {
+        $this->validate($request, [
+            'id_usuario' => 'required'
+        ]);
+
+        $id_usuario = $request->input('id_usuario');
+
+        $cuentas = Cuenta::where('id_usuario', $id_usuario)->get();
+        return response()->json($cuentas);
+    }
+
 
     public function getAllDiscountsUser(Request $request) {
         $this->validate($request, [
@@ -104,10 +116,11 @@ class CuentaController extends Controller
 
         $id_usuario = $request->input('id_usuario');
         $descuentos = DB::table('cuenta as c')
-                ->select('d.*')
+                ->select('c.id_cuenta', 'd.*')
                 ->leftJoin('descuento as d', 'c.id_descuento', '=', 'd.id')
                 ->leftJoin('usuarios as u', 'c.id_usuario', '=', 'u.id_usuario')
                 ->where('c.id_usuario', $id_usuario)
+                ->where('c.descuento_activado', 0)
                 ->get();
 
 
@@ -115,4 +128,25 @@ class CuentaController extends Controller
             return response()->json($descuentos);  
         }      
     }
+
+    public function actualizarDescuentoUsuario(Request $request)
+    {
+        $this->validate($request, [
+            'id_usuario' => 'required',
+            'id_descuento' => 'required'
+        ]);
+
+        $id_usuario = $request->input('id_usuario');
+        $id_descuento = $request->input('id_descuento');
+
+        $descuento = Cuenta::where('id_usuario', $id_usuario)
+                      ->where('id_descuento', $id_descuento)
+                      ->first();
+        $descuento->descuento_activado = 1;
+        
+        $descuento->save();
+        return response()->json($descuento);
+    }
+
+
 }

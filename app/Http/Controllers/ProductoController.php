@@ -144,4 +144,19 @@ class ProductoController extends Controller
         $producto->delete();
         return response()->json('Producto eliminado');
     }
+
+
+    public function eliminarProducto(Request $request)
+    {
+
+        $this->validate($request, [
+            'cb_producto' => 'required'
+        ]);
+
+        $cb_producto = $request->input('cb_producto');
+        
+        $producto = Producto::find($cb_producto);
+        $producto->delete();
+        return response()->json('Producto eliminado');
+    }
 }
