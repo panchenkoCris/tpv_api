@@ -163,7 +163,7 @@ class LineaticketController extends Controller
         
         $lineaticket = Lineaticket::find($id_lineaticket);
         $lineaticket->delete();
-        return response()->json('Linea ticket eliminada');
+        return response()->json($lineaticket);
     }
 
 }
